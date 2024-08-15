@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: myapp-rs
+    labels:
+        app: myapp
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            type: front-end
+    template:
+        # here we define the pod template, as a pod file by no apiVersion and kind
+        metadata:
+            name: myapp-pod
+            labels:
+                app: myapp
+                type: front-end
+        spec:
+            containers:
+                - name: nginx-container
+                  image: nginx
