@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: api-deployment
+    labels:
+        app: api
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: api
+    template:
+        metadata:
+            labels:
+                app: api
+        spec:
+            containers:
+                - name: api-container
+                  # Backend serving data via ClusterIP only
+                  image: hashicorp/http-echo:latest
+                  ports:
+                      - containerPort: 5678
+                  args:
+                      - "-text=Backend Data from ClusterIP!"
