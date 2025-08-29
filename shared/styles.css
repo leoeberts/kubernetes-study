@@ -1,0 +1,348 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 15px;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 95vw;
+    margin: 0 auto;
+    height: calc(100vh - 30px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.nav-btn {
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    transform: translateY(-1px);
+}
+
+.nav-btn.projects {
+    background: #6c757d;
+    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
+}
+
+.nav-btn.projects:hover {
+    background: #5a6268;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+/* Content layout */
+.content {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 15px;
+    flex: 1;
+    min-height: 0;
+}
+
+.diagram-section {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.diagram-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+/* Diagram tabs (for multi-diagram projects) */
+.diagram-tabs {
+    display: flex;
+    gap: 5px;
+    margin-right: 15px;
+}
+
+.tab-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.tab-btn:hover {
+    background: #5a6268;
+}
+
+.tab-btn.active {
+    background: #dc3545;
+}
+
+/* Zoom controls */
+.zoom-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.zoom-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.zoom-btn:hover {
+    background: #5a67d8;
+}
+
+/* Diagram area */
+#mermaid-diagram {
+    flex: 1;
+    overflow: auto;
+    cursor: grab;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+#mermaid-diagram:active {
+    cursor: grabbing;
+}
+
+/* Info panel */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.info-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.info-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 8px;
+}
+
+.component {
+    margin: 10px 0;
+    padding: 8px;
+    border-left: 3px solid #667eea;
+    background: #f8f9ff;
+    border-radius: 0 5px 5px 0;
+}
+
+.component strong {
+    color: #2c3e50;
+}
+
+.deployment-feature {
+    margin: 8px 0;
+    padding: 8px 12px;
+    background: #e3f2fd;
+    border-radius: 5px;
+    border-left: 3px solid #2196f3;
+}
+
+.cloud-feature {
+    margin: 8px 0;
+    padding: 8px 12px;
+    background: #fff3e0;
+    border-radius: 5px;
+    border-left: 3px solid #ff9900;
+}
+
+/* Complexity badges */
+.complexity {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Technology stack badges */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tech {
+    padding: 4px 8px;
+    color: white;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .content {
+        grid-template-columns: 1fr 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+    .info-panel {
+        max-height: 300px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 98vw;
+    }
+    .content {
+        grid-template-columns: 1fr 320px;
+    }
+}
+
+/* Difficulty-based color schemes */
+
+/* Basic Projects (01-02) */
+.difficulty-basic .navigation {
+    background: rgba(212, 237, 218, 0.15);
+    border-color: rgba(212, 237, 218, 0.3);
+}
+
+.difficulty-basic .header {
+    background: linear-gradient(135deg, #d4edda 0%, #f1f9f2 100%);
+    color: #155724;
+}
+
+.difficulty-basic .nav-btn:not(.projects) {
+    background: #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+
+.difficulty-basic .nav-btn:not(.projects):hover {
+    background: #218838;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.difficulty-basic .complexity {
+    background: #d4edda;
+    color: #155724;
+}
+
+.difficulty-basic .tech {
+    background: #28a745;
+}
+
+/* Intermediate Projects (03-07) */
+.difficulty-intermediate .navigation {
+    background: rgba(255, 243, 205, 0.15);
+    border-color: rgba(255, 243, 205, 0.3);
+}
+
+.difficulty-intermediate .header {
+    background: linear-gradient(135deg, #fff3cd 0%, #fffbf0 100%);
+    color: #856404;
+}
+
+.difficulty-intermediate .nav-btn:not(.projects) {
+    background: #ffc107;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+}
+
+.difficulty-intermediate .nav-btn:not(.projects):hover {
+    background: #e0a800;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.difficulty-intermediate .complexity {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.difficulty-intermediate .tech {
+    background: #ffc107;
+}
+
+/* Advanced Projects (08-11) */
+.difficulty-advanced .navigation {
+    background: rgba(248, 215, 218, 0.15);
+    border-color: rgba(248, 215, 218, 0.3);
+}
+
+.difficulty-advanced .header {
+    background: linear-gradient(135deg, #f8d7da 0%, #fcf1f2 100%);
+    color: #721c24;
+}
+
+.difficulty-advanced .nav-btn:not(.projects) {
+    background: #dc3545;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+
+.difficulty-advanced .nav-btn:not(.projects):hover {
+    background: #c82333;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.difficulty-advanced .complexity {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.difficulty-advanced .tech {
+    background: #dc3545;
+}

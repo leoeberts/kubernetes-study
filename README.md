@@ -71,6 +71,30 @@ The repository is organized into separate numbered folders, each containing a co
   - `10.04.postgres-deployment.yml` - PostgreSQL database deployment
   - `10.04.postgres-service.yml` - PostgreSQL service configuration
 
+### ☁️ Cloud-Native Deployment (11)
+- **`11-eks/`** - AWS EKS voting application with Terraform infrastructure
+  - `terraform/` - Infrastructure as Code for EKS cluster provisioning
+    - `main.tf` - EKS cluster and node group configuration
+    - `network.tf` - VPC, subnets, and networking setup
+    - `iam.tf` - IAM roles and policies for EKS
+    - `variables.tf` - Terraform input variables
+    - `providers.tf` - AWS provider configuration
+    - `backend.tf` - Terraform state backend configuration
+    - `data.tf` - Data sources for AWS resources
+    - `locals.tf` - Local values and computed configurations
+  - `k8s/` - Kubernetes application manifests
+    - `vote-deployment.yaml` - Python Flask voting frontend
+    - `vote-service.yaml` - LoadBalancer service for external access
+    - `result-deployment.yaml` - Node.js results display
+    - `result-service.yaml` - LoadBalancer service for results
+    - `worker-deployment.yaml` - .NET Core vote processor
+    - `redis-deployment.yaml` - Redis cache deployment
+    - `redis-service.yaml` - Redis ClusterIP service
+    - `db-deployment.yaml` - PostgreSQL database deployment
+    - `db-service.yaml` - PostgreSQL ClusterIP service
+  - `diagram.html` - Interactive EKS architecture visualization
+  - `diagram.js` - Mermaid diagram source
+
 ## 🚀 Common Commands
 
 ### Project Deployment
@@ -80,6 +104,7 @@ kubectl apply -f 01-basic-pod/
 kubectl apply -f 08-web-api-services/
 kubectl apply -f 09-voting-app/
 kubectl apply -f 10-voting-app-deployment/
+kubectl apply -f 11-eks/k8s/
 
 # Deploy from within a project folder
 cd 01-basic-pod/
@@ -115,12 +140,44 @@ kubectl set image deployment/myapp-deployment nginx=nginx:1.21
 kubectl rollout undo deployment/myapp-deployment
 ```
 
+### AWS EKS with Terraform (Project 11)
+```bash
+# Navigate to terraform directory
+cd 11-eks/terraform/
+
+# Initialize and plan infrastructure
+terraform init
+terraform plan
+
+# Deploy EKS cluster
+terraform apply
+
+# Configure kubectl
+aws eks update-kubeconfig --region eu-central-1 --name example-voting-app
+
+# Deploy application
+cd ../k8s/
+kubectl apply -f .
+
+# Get LoadBalancer URLs
+kubectl get services vote result
+
+# Cleanup
+kubectl delete -f .
+cd ../terraform/
+terraform destroy
+```
+
 ## 🎨 Visual Documentation
 
 Each project includes interactive visualizations following [Kubernetes documentation best practices](https://kubernetes.io/docs/contribute/style/diagram-guide/).
 
 ### Interactive Diagrams
-- **Main Navigation**: `index.html` - Project overview with complexity levels
+- **Main Navigation**: `index.html` - Complete project gallery with:
+  - Interactive project cards showing complexity levels (Basic/Intermediate/Advanced)
+  - Direct links to diagram visualizations and project files
+  - Key learning concepts overview (Pods, Services, Cloud Native, etc.)
+  - Projects 01-11 with progression from basic pods to AWS EKS
 - **Individual Projects**: Each folder has `diagram.html` with interactive Mermaid diagrams
 - **Project-Specific**: Detailed component descriptions and deployment commands
 
@@ -130,12 +187,25 @@ Each project includes interactive visualizations following [Kubernetes documenta
 - **Educational Focus**: Clear visualization of Kubernetes concepts
 
 ### Color Scheme
+
+#### Interactive Project Gallery (index.html)
+Each project has a unique visual identity in the main navigation:
+- **Projects 01-02** (Basic Pods): Light blue gradients (`#e1f5fe`) - Foundation concepts
+- **Projects 03-04** (Controllers): Orange/blue gradients (`#fff3e0`/`#e3f2fd`) - Replica management
+- **Projects 05-06** (Deployments): Orange gradients (`#fff3e0`) - Application management
+- **Project 07** (Services): Light green gradient (`#e8f5e8`) - Network access
+- **Project 08** (Multi-tier): Light purple gradient (`#f3e5f5`) - Service architecture
+- **Projects 09-10** (Microservices): Yellow/amber gradients (`#fff9c4`/`#ffecb3`) - Complex apps
+- **Project 11** (Cloud-Native): Light orange gradient (`#ffe0b2`) - AWS EKS deployment
+
+#### Diagram Components (diagram.html pages)
 - **Pods**: Light blue (`#e1f5fe`)
 - **Services**: Light green (`#e8f5e8`) / Light purple (`#f3e5f5`) 
 - **Controllers**: Light orange (`#fff3e0`) / Light blue (`#e3f2fd`)
 - **Data Stores**: Light yellow (`#fff9c4`) / Amber (`#ffecb3`)
 - **External Access**: Light orange (`#fff3e0`)
 - **Containers**: Light purple (`#f3e5f5`)
+- **Cloud Infrastructure**: AWS orange (`#ffe0b2`) / Light orange (`#fff3e0`)
 
 ## 📊 Generating SVG Diagrams
 
@@ -187,7 +257,8 @@ This repository demonstrates Kubernetes concepts in logical progression:
 2. **Controllers** (03-04): Managing pod replicas and lifecycle
 3. **Deployments** (05-06): Declarative application management with updates
 4. **Services** (07-08): Network access and load balancing
-5. **Microservices** (09): Complex multi-service applications
+5. **Microservices** (09-10): Complex multi-service applications
+6. **Cloud-Native** (11): AWS EKS with Terraform infrastructure
 
 ### Key Learning Patterns
 - **Service Types**: NodePort for external access, ClusterIP for internal communication
@@ -201,6 +272,7 @@ This repository demonstrates Kubernetes concepts in logical progression:
 - **Networked (07-08)**: External access → Frontend/backend separation
 - **Pod-based Microservices (09)**: Voting App → Redis → Worker → PostgreSQL → Results App
 - **Deployment-based Microservices (10)**: Scalable voting application with replicas and rolling updates
+- **Cloud-Native Microservices (11)**: AWS EKS deployment with Terraform infrastructure, LoadBalancer services, and managed Kubernetes
 
 ## 🎓 My Learning Path
 
@@ -214,12 +286,15 @@ This repository demonstrates Kubernetes concepts in logical progression:
 - Learning update and rollback strategies
 - Understanding service networking
 
-### Advanced Phase (Projects 08-10)
+### Advanced Phase (Projects 08-11)
 - Implementing multi-tier architectures
 - Designing microservices communication
 - Managing complex data flows
 - Comparing Pod vs. Deployment approaches
 - Understanding scaling and high availability patterns
+- Deploying to managed Kubernetes services (EKS)
+- Infrastructure as Code with Terraform
+- Cloud-native service patterns (LoadBalancer, IAM integration)
 
 ## 🛠️ Development Setup
 
@@ -227,6 +302,7 @@ This repository demonstrates Kubernetes concepts in logical progression:
 - Kubernetes cluster (minikube, kind, or cloud provider)
 - kubectl CLI tool
 - Web browser for viewing interactive diagrams
+- **For Project 11**: Terraform, AWS CLI, AWS account with EKS permissions
 
 ### Optional Tools
 - mermaid-cli for SVG generation
@@ -267,5 +343,132 @@ XX-module-name/
 ├── diagram.html           # Interactive visualization page
 └── diagram.js             # Mermaid diagram definition
 ```
+
+## 📐 Design Template Documentation
+
+### Project Structure Requirements
+
+All projects follow identical structure patterns. No deviations unless technically necessary.
+
+#### Required File Structure
+```
+XX-project-name/
+├── [files].yml                # Kubernetes YAML configurations  
+├── diagram.html                # Interactive visualization page
+└── diagram.js                  # Mermaid diagram definition
+```
+
+**Special Cases:**
+- Project 11 includes `terraform-diagram.js` for infrastructure view
+- Project 11 contains `k8s/` and `terraform/` subdirectories
+
+#### diagram.html Template
+
+**Master Template**: `01-basic-pod/diagram.html` 
+
+**Required Structure:**
+- Fixed navigation: `position: fixed; top: 20px; right: 20px;`
+- Main container: `.container` with flexbox column layout
+- Header section: Project title, complexity badge, description
+- Content grid: Two-column layout (diagram-section + info-panel)
+- Interactive controls: Zoom buttons (+, -, ⌂, ⧉)
+- Responsive breakpoints: 1024px, 768px, 1400px
+
+#### Difficulty-Based Color System
+
+**Basic (01-02):**
+- Header: `linear-gradient(135deg, #d4edda 0%, #f1f9f2 100%)`
+- Text: `#155724`
+- Nav Buttons: `#28a745` / `#218838`
+
+**Intermediate (03-07):** 
+- Header: `linear-gradient(135deg, #fff3cd 0%, #fffbf0 100%)`
+- Text: `#856404`
+- Nav Buttons: `#ffc107` / `#e0a800`
+
+**Advanced (08-11):**
+- Header: `linear-gradient(135deg, #f8d7da 0%, #fcf1f2 100%)`
+- Text: `#721c24`  
+- Nav Buttons: `#dc3545` / `#c82333`
+
+**4. Required Info Cards**
+- **Components**: List main Kubernetes resources
+- **Services/Networking**: Service types and access patterns
+- **Key Features/Benefits**: Technology-specific advantages
+- **Technology Stack**: Tech badges for used technologies
+- **Deployment Commands**: Code block with kubectl commands
+
+**5. Interactive Features**
+- Zoom controls: `+` (zoom in), `-` (zoom out), `⌂` (reset), `⧉` (fit to screen)
+- Mouse pan functionality with drag cursor
+- Wheel zoom support
+- Auto-fit on page load and resize
+
+#### diagram.js Structure
+
+**Master Template**: `09-voting-app/diagram.js`
+
+**Required Elements:**
+- Mermaid syntax: `graph TB` (top-bottom layout)
+- Layer organization: External Users → Kubernetes Cluster → Data Layer
+- Descriptive labels: Include service types, ports, technologies
+- Connection patterns: `-->` for data flow, `-.->` for service-to-pod
+- Browser/Node.js exports: Both `window.diagramCode` and `module.exports`
+
+#### Navigation Implementation
+
+**Fixed Positioning Template:**
+```css
+.navigation {
+    position: fixed;
+    top: 20px; 
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+```
+
+**Navigation Rules:**
+- Project 01: `📋 Projects` + `Project 02 →`  
+- Projects 02-10: `← Project [N-1]` + `📋 Projects` + `Project [N+1] →`
+- Project 11: `← Project 10` + `📋 Projects`
+
+#### Diagram Color Standards
+
+Follow https://kubernetes.io/docs/contribute/style/diagram-guide/:
+
+**Kubernetes Components:**
+- Pods: `#e1f5fe`
+- Services: `#e8f5e8` or `#f3e5f5`
+- Data Stores: `#fff9c4` or `#ffecb3`
+- External Access: `#fff3e0`
+
+**Cloud Resources:**
+- AWS Infrastructure: `#ffe0b2`
+- Multi-Cloud: `#f8f9fa`
+
+#### index.html Structure
+
+**Difficulty-Based Classes:**
+- `.project-01, .project-02` (Basic)
+- `.project-03, .project-04, .project-05, .project-06, .project-07` (Intermediate)
+- `.project-08, .project-09, .project-10, .project-11` (Advanced)
+
+#### Multi-Diagram Projects
+
+**Example: Project 11**
+- Main diagram: `diagram.js` (Kubernetes application view)
+- Secondary: `terraform-diagram.js` (AWS infrastructure view)
+- Tab switching: Implemented in HTML with JavaScript functions
+
+#### Implementation Steps
+
+1. Copy `01-basic-pod/diagram.html` as base template
+2. Apply appropriate difficulty colors to header and navigation
+3. Create `diagram.js` following `09-voting-app/diagram.js` pattern
+4. Update `index.html` with new project card using difficulty class
+5. Test zoom controls, navigation, and responsive layout
+
+All projects must maintain identical structure and behavior unless technical requirements demand variation.
 
 **🚀 Explore my Kubernetes study materials: Open `index.html` to browse the interactive project gallery!**

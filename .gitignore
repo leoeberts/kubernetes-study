@@ -1,0 +1,35 @@
+# Terraform
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive variable files (do not commit)
+*.tfvars
+*.tfvars.json
+
+# Local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plan files
+*.tfplan
+*.plan
+
+# Terragrunt cache (if used)
+**/.terragrunt-cache/
+
+# Terraform CLI config files
+.terraformrc
+terraform.rc
+
+# Note: keep .terraform.lock.hcl committed for provider dependency pinning
+
