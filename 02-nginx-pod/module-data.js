@@ -34,7 +34,7 @@ kubectl apply -f 02.nginx.yml
 kubectl get pods
 
 # Get pod details
-kubectl describe pod nginx-pod
+kubectl describe pod nginx-2
 
 # Delete the pod
 kubectl delete -f 02.nginx.yml`

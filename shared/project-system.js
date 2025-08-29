@@ -2,6 +2,7 @@ class ProjectSystem {
   constructor() {
     this.allModules = {};
     this.moduleOrder = [];
+    this.basePath = window.location.pathname.includes('/shared/') ? '../' : '';
   }
 
   async discoverModules() {
@@ -34,7 +35,7 @@ class ProjectSystem {
     
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = `${moduleId}/module-data.js`;
+      script.src = `${this.basePath}${moduleId}/module-data.js`;
       script.onload = () => {
         if (window.moduleData) {
           this.allModules[moduleId] = window.moduleData;
@@ -62,13 +63,13 @@ class ProjectSystem {
       if (!data) return '';
       
       return `
-        <div class="project-card project-${data.projectNumber}">
+        <div class="project-card ${data.complexity}">
           <div class="project-number">${data.projectNumber}</div>
           <div class="project-title">${data.title}</div>
           <div class="complexity ${data.complexity}">${data.complexity.charAt(0).toUpperCase() + data.complexity.slice(1)}</div>
           <div class="project-description">${data.description}</div>
           <div class="actions">
-            <a href="project.html?module=${moduleId}" class="btn btn-primary">View Diagram</a>
+            <a href="shared/project.html?module=${moduleId}" class="btn btn-primary">View Diagram</a>
             <a href="${moduleId}/" class="btn btn-secondary">Files</a>
           </div>
         </div>
@@ -141,12 +142,12 @@ class ProjectSystem {
       `;
       
       const terraformScript = document.createElement('script');
-      terraformScript.src = `${data.id}/terraform-diagram.js`;
+      terraformScript.src = `${this.basePath}${data.id}/terraform-diagram.js`;
       document.head.appendChild(terraformScript);
     }
 
     const diagramScript = document.createElement('script');
-    diagramScript.src = `${data.id}/diagram.js`;
+    diagramScript.src = `${this.basePath}${data.id}/diagram.js`;
     diagramScript.onload = () => {
       this.initializeDiagram();
     };
