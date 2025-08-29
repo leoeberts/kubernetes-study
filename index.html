@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kubernetes Learning Projects</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="shared/project-system.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -154,148 +155,6 @@
     </div>
 
     <div class="projects-grid">
-        <div class="project-card project-01">
-            <div class="project-number">01</div>
-            <div class="project-title">Basic Pod</div>
-            <div class="complexity basic">Basic</div>
-            <div class="project-description">
-                Introduction to Kubernetes pods - the fundamental deployment unit. Learn how to create a simple pod with an nginx container.
-            </div>
-            <div class="actions">
-                <a href="01-basic-pod/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="01-basic-pod/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-02">
-            <div class="project-number">02</div>
-            <div class="project-title">Nginx Pod</div>
-            <div class="complexity basic">Basic</div>
-            <div class="project-description">
-                Extended pod example with custom nginx configuration. Explores pod naming, labeling, and basic customization.
-            </div>
-            <div class="actions">
-                <a href="02-nginx-pod/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="02-nginx-pod/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-03">
-            <div class="project-number">03</div>
-            <div class="project-title">ReplicationController</div>
-            <div class="complexity intermediate">Intermediate</div>
-            <div class="project-description">
-                High availability through pod replication. Learn how ReplicationControllers ensure desired number of pod replicas are running.
-            </div>
-            <div class="actions">
-                <a href="03-replication-controller/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="03-replication-controller/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-04">
-            <div class="project-number">04</div>
-            <div class="project-title">ReplicaSet</div>
-            <div class="complexity intermediate">Intermediate</div>
-            <div class="project-description">
-                Modern replacement for ReplicationController with more expressive label selectors and set-based requirements.
-            </div>
-            <div class="actions">
-                <a href="04-replica-set/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="04-replica-set/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-05">
-            <div class="project-number">05</div>
-            <div class="project-title">Deployment</div>
-            <div class="complexity intermediate">Intermediate</div>
-            <div class="project-description">
-                Declarative application deployment with rolling updates and rollback capabilities. The preferred way to manage applications.
-            </div>
-            <div class="actions">
-                <a href="05-deployment/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="05-deployment/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-06">
-            <div class="project-number">06</div>
-            <div class="project-title">Update & Rollback</div>
-            <div class="complexity intermediate">Intermediate</div>
-            <div class="project-description">
-                Deployment strategies and rollback mechanisms. Learn about Recreate strategy and managing deployment history.
-            </div>
-            <div class="actions">
-                <a href="06-update-rollback/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="06-update-rollback/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-07">
-            <div class="project-number">07</div>
-            <div class="project-title">NodePort Service</div>
-            <div class="complexity intermediate">Intermediate</div>
-            <div class="project-description">
-                External access to applications using NodePort services. Understand service types and external connectivity.
-            </div>
-            <div class="actions">
-                <a href="07-service-nodeport/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="07-service-nodeport/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-08">
-            <div class="project-number">08</div>
-            <div class="project-title">Web API Services</div>
-            <div class="complexity advanced">Advanced</div>
-            <div class="project-description">
-                Multi-tier service architecture with frontend nginx proxy and backend API. Learn service-to-service communication.
-            </div>
-            <div class="actions">
-                <a href="08-web-api-services/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="08-web-api-services/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-09">
-            <div class="project-number">09</div>
-            <div class="project-title">Voting Application</div>
-            <div class="complexity advanced">Advanced</div>
-            <div class="project-description">
-                Complete microservices application with voting frontend, results display, worker processes, Redis cache, and PostgreSQL database.
-            </div>
-            <div class="actions">
-                <a href="09-voting-app/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="09-voting-app/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-10">
-            <div class="project-number">10</div>
-            <div class="project-title">Voting Application (Deployments)</div>
-            <div class="complexity advanced">Advanced</div>
-            <div class="project-description">
-                Enhanced version of the voting application using Deployments instead of Pods for better scalability, rolling updates, and high availability.
-            </div>
-            <div class="actions">
-                <a href="10-voting-app-deployment/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="10-voting-app-deployment/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
-
-        <div class="project-card project-11">
-            <div class="project-number">11</div>
-            <div class="project-title">AWS EKS Voting Application</div>
-            <div class="complexity advanced">Advanced</div>
-            <div class="project-description">
-                Cloud-native deployment using AWS EKS with Terraform infrastructure. Includes LoadBalancer services, managed Kubernetes, and Infrastructure as Code.
-            </div>
-            <div class="actions">
-                <a href="11-eks/diagram.html" class="btn btn-primary">View Diagram</a>
-                <a href="11-eks/" class="btn btn-secondary">Files</a>
-            </div>
-        </div>
     </div>
 
     <div class="key-concepts">
@@ -354,6 +213,7 @@
             theme: 'default',
             securityLevel: 'loose'
         });
+        
     </script>
 </body>
 </html>

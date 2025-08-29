@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="shared/styles.css">
+    <script src="shared/project-system.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <div id="nav-left"></div>
+            <div><a href="index.html" class="nav-btn projects">📋 Projects</a></div>
+            <div id="nav-right"></div>
+        </div>
+        
+        <div class="header">
+            <h1 id="project-title">Loading...</h1>
+            <span class="complexity" id="complexity-badge">Loading</span>
+            <p id="project-description">Loading...</p>
+        </div>
+
+        <div class="content">
+            <div class="diagram-section">
+                <div class="diagram-header">
+                    <h2 id="diagram-title">System Architecture</h2>
+                    <div class="diagram-tabs" id="diagram-tabs" style="display: none;"></div>
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                        <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">-</button>
+                        <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+                        <button class="zoom-btn" onclick="fitToScreen()" title="Fit to Screen">⧉</button>
+                    </div>
+                </div>
+                <div id="mermaid-diagram">Loading diagram...</div>
+            </div>
+            <div class="info-panel" id="info-panel">Loading...</div>
+        </div>
+    </div>
+</body>
+</html>
